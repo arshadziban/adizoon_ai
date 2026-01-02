@@ -21,7 +21,7 @@ OratorAI is a comprehensive full-stack web application that seamlessly integrate
 
 ## System Architecture
 
-**Flow:** Audio → Upload → Transcribe → Generate Response → Display
+![flow](./ui/flow_char.png)
 
 ## Conclusion
 
