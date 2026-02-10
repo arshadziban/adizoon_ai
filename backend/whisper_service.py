@@ -2,6 +2,21 @@ import whisper
 import os
 import sys
 
+# Add ffmpeg to PATH if not already available
+# Common ffmpeg locations on Windows
+ffmpeg_paths = [
+    r"C:\Users\zibsh\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.0.1-full_build\bin",
+    r"C:\ffmpeg\bin",
+    r"C:\Program Files\ffmpeg\bin",
+    os.path.expanduser(r"~\ffmpeg\bin"),
+]
+
+for ffmpeg_path in ffmpeg_paths:
+    if os.path.exists(ffmpeg_path) and ffmpeg_path not in os.environ.get("PATH", ""):
+        os.environ["PATH"] = ffmpeg_path + os.pathsep + os.environ.get("PATH", "")
+        print(f"Added ffmpeg to PATH: {ffmpeg_path}")
+        break
+
 print("Loading Whisper model...")
 try:
     model = whisper.load_model("base")

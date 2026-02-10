@@ -1,9 +1,4 @@
-"""
-Configuration settings for OratorAI Chatbot Application.
 
-Environment Variables:
-    - PERPLEXITY_API_KEY: API key for Perplexity AI chat completions
-"""
 import os
 from dotenv import load_dotenv
 
@@ -13,7 +8,7 @@ load_dotenv()
 PERPLEXITY_API_KEY = os.getenv("PERPLEXITY_API_KEY")
 
 # Application Settings
-APP_NAME = "OratorAI"
+APP_NAME = "Adizoon"
 APP_VERSION = "1.0.0"
 APP_DESCRIPTION = "AI-powered conversational chatbot with audio transcription"
 

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import shutil
@@ -6,10 +6,11 @@ import os
 import traceback
 import tempfile
 import uuid
+import json
 from whisper_service import process_audio
 from rewrite_service import generate_chatbot_response
 
-app = FastAPI(title="OratorAI Chatbot API", description="AI-powered chatbot with audio transcription")
+app = FastAPI(title="Adizoon Chatbot API", description="AI-powered chatbot with audio transcription")
 
 # Enable CORS
 app.add_middleware(
@@ -26,14 +27,21 @@ async def health():
     return {"status": "ok"}
 
 @app.post("/transcribe")
-async def transcribe_audio(file: UploadFile = File(...)):
+async def transcribe_audio(file: UploadFile = File(...), history: str = Form(default="[]")):
     """
     Transcribe audio file to text using Whisper model.
     
     - **file**: Audio file to transcribe (supports: wav, mp3, m4a, etc.)
+    - **history**: JSON string of conversation history
     - Returns: Transcribed text
     """
     file_path = None
+    
+    # Parse history
+    try:
+        chat_history = json.loads(history)
+    except:
+        chat_history = []
     
     try:
         # Use absolute path in temp directory with a simple name
@@ -81,7 +89,7 @@ async def transcribe_audio(file: UploadFile = File(...)):
         
         # Generate AI chatbot response
         print(f"\n[STEP 6] Generating AI response from chatbot")
-        chatbot_response = generate_chatbot_response(transcribed_text)
+        chatbot_response = generate_chatbot_response(transcribed_text, chat_history)
         print(f"  ✓ Success")
         
         print(f"\n[SUCCESS] Processing complete")
@@ -135,6 +143,51 @@ async def transcribe_audio(file: UploadFile = File(...)):
                 print(f"[CLEANUP] Removed: {file_path}\n")
             except Exception as e:
                 print(f"[CLEANUP] Failed to remove {file_path}: {e}\n")
+
+
+from pydantic import BaseModel
+
+class TextMessage(BaseModel):
+    message: str
+    history: list = []
+
+@app.post("/chat")
+async def chat_text(data: TextMessage):
+    """
+    Send a text message and get AI chatbot response.
+    
+    - **message**: Text message to send to the chatbot
+    - **history**: Previous conversation messages [{"role": "user"/"assistant", "content": "..."}]
+    - Returns: Chatbot response
+    """
+    try:
+        print(f"\n{'='*60}")
+        print(f"[TEXT CHAT] Received message: {data.message[:50]}...")
+        print(f"[TEXT CHAT] History length: {len(data.history)} messages")
+        
+        # Generate AI chatbot response with history
+        chatbot_response = generate_chatbot_response(data.message, data.history)
+        print(f"  ✓ Success")
+        print(f"{'='*60}\n")
+        
+        return {
+            "user_message": data.message,
+            "chatbot_response": chatbot_response
+        }
+        
+    except Exception as e:
+        error_msg = f"{type(e).__name__}: {str(e)}"
+        print(f"\n[ERROR] {error_msg}")
+        print(traceback.format_exc())
+        print(f"{'='*60}\n")
+        
+        return JSONResponse(
+            status_code=400,
+            content={
+                "error": error_msg,
+                "chatbot_response": ""
+            }
+        )
 
 
 if __name__ == "__main__":
