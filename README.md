@@ -9,35 +9,30 @@ An intelligent voice-powered AI chatbot that combines OpenAI Whisper for speech-
 
 ## Features
 
-- **Voice Recording** - Record audio directly in the browser
-- **Speech-to-Text** - Powered by OpenAI Whisper
-- **AI Responses** - Context-aware replies using Perplexity AI
-- **Chat History** - Persistent conversation storage
-- **Dark Theme** - Modern, eye-friendly interface
-- **Responsive Design** - Works on desktop and mobile
+![Features](./img/features.png)
 
 ## Screenshots
 
 ### Login Page
-![Login](./ui/1.png)
+![Login](./img/1.png)
 
 ### Chat Interface
-![Chat Interface](./ui/2.png)
+![Chat Interface](./img/2.png)
 
 ### Voice Recording
-![Voice Recording](./ui/3.png)
+![Voice Recording](./img/3.png)
 
 ### AI Response
-![AI Response](./ui/4.png)
+![AI Response](./img/4.png)
 
 ### Profile Page
-![Profile](./ui/5.png)
+![Profile](./img/5.png)
 
 ### Settings
-![Settings](./ui/6.png)
+![Settings](./img/6.png)
 
 ### About Page
-![About](./ui/7.png)
+![About](./img/7.png)
 
 ## Tech Stack
 
