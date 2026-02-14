@@ -9,30 +9,30 @@ Adizoon is an intelligent conversational AI chatbot that integrates real-time au
 
 ## Features
 
-![Features](./img/key_features.png)
+![Features](./img/key_features.png?v=2)
 
 ## Screenshots
 
 ### Login Page
-![Login](./img/1.png)
+![Login](./img/1.png?v=2)
 
 ### Chat Interface
-![OTP Code Interface](./img/2.png)
+![OTP Code Interface](./img/2.png?v=2)
 
 ### Voice Recording
-![User Profile](./img/3.png)
+![User Profile](./img/3.png?v=2)
 
 ### AI Response
-![AI Response](./img/4.png)
+![AI Response](./img/4.png?v=2)
 
 ### Profile Page
-![Voice Recording Page](./img/5.png)
+![Voice Recording Page](./img/5.png?v=2)
 
 ### Settings
-![AI Response](./img/6.png)
+![AI Response](./img/6.png?v=2)
 
 ### About Page
-![Upgrade Plan](./img/7.png)
+![Upgrade Plan](./img/7.png?v=2)
 
 ## Tech Stack
 
@@ -75,7 +75,7 @@ Open http://localhost:5173 in your browser.
 
 ## How It Works
 
-![System Flow](./img/system%20flow_chat.png)
+![System Flow](./img/system%20flow_chat.png?v=2)
 
 ## Project Structure
 
