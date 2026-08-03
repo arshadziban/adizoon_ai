@@ -69,8 +69,6 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173 in your browser.
-
 ## How It Works
 
 ![System Flow](./img/system%20flow_chat.png?v=2)
